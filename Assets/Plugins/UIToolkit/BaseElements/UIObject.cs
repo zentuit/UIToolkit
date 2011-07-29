@@ -7,12 +7,16 @@ public class UIObject : System.Object
 	public delegate void UIObjectTransormChagedDelegate();
 	public event UIObjectTransormChagedDelegate onTransformChanged;
 	
+	/*
 	private GameObject _client; // Reference to the client GameObject
     public GameObject client
     {
     	get { return _client; }
     }
     protected Transform clientTransform; // Cached Transform of the client GameObject
+    */
+	
+	protected UITransform clientTransform;
     private UIObject _parentUIObject;
     public virtual Color color { get; set; } // hack that is overridden in UISprite just for animation support
     
@@ -23,12 +27,13 @@ public class UIObject : System.Object
     public UIObject()
     {
 		// Setup our GO
-		_client = new GameObject( this.GetType().Name );
-		_client.transform.parent = UI.instance.transform; // Just for orginization in the hierarchy
-		_client.layer = UI.instance.layer; // Set the proper layer so we only render on the UI camera
+		//_client = new GameObject( this.GetType().Name );
+		//_client.transform.parent = UI.instance.transform; // Just for orginization in the hierarchy
+		//_client.layer = UI.instance.layer; // Set the proper layer so we only render on the UI camera
 		
 		// Cache the clientTransform
-		clientTransform = _client.transform;
+		//clientTransform = _client.transform;
+		clientTransform = new UITransform();
     }
 
 	
@@ -94,7 +99,7 @@ public class UIObject : System.Object
 	}
 	
 	
-	public virtual Transform parent
+	public virtual UITransform parent
 	{
 		get { return clientTransform.parent; }
 		set { clientTransform.parent = value; }
@@ -124,17 +129,21 @@ public class UIObject : System.Object
 						
 			_parentUIObject = value;
 			
-			// if we got a null value, then we are being removed from the UIObject so reparent to our manager
+			// if we got a value, just set the parent
+			// else then we are being removed from the UIObject so reparent to nada
 			if( _parentUIObject != null )
 			{
 				clientTransform.parent = _parentUIObject.clientTransform;
 			}
 			else
 			{
+				clientTransform.parent = null;
+				/*
 				if( this.GetType() == typeof( UISprite ) )
 					clientTransform.parent = ((UISprite)this).manager.transform;
 				else
 					clientTransform.parent = null;
+				*/
 			}
 			
 			// add the new listener
@@ -147,7 +156,7 @@ public class UIObject : System.Object
 	
 	public virtual void transformChanged()
 	{
-
+		
 	}
 
 }

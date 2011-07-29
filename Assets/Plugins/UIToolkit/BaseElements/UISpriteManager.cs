@@ -385,7 +385,7 @@ public class UISpriteManager : MonoBehaviour
 		
         sprite.index = i;
         sprite.manager = this as UIToolkit;
-        sprite.parent = transform;
+        //sprite.parent = transform;
 
         sprite.setBuffers( vertices, UVs );
 
@@ -411,7 +411,7 @@ public class UISpriteManager : MonoBehaviour
         _sprites[sprite.index] = null;
 		
 		// This should happen when the sprite dies!!
-		Destroy( sprite.client );
+		//Destroy( sprite.client );
 		
         vertsChanged = true;
 		meshIsDirty = true;

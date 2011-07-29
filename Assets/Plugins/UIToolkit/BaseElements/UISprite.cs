@@ -44,7 +44,8 @@ public class UISprite : UIObject, IPositionable
 		this.gameObjectOriginInCenter = gameObjectOriginInCenter;
 		
 		// Setup our GO
-		client.transform.position = new Vector3( frame.x, -frame.y, depth ); // Depth will affect z-index
+		clientTransform.position = new Vector3( frame.x, -frame.y, depth ); // Depth will affect z-index
+		//client.transform.position = new Vector3( frame.x, -frame.y, depth ); // Depth will affect z-index
 		
 		// Save these for later.  The manager will call initializeSize() when the UV's get setup
 		_width = frame.width;

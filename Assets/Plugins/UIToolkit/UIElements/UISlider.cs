@@ -37,7 +37,7 @@ public class UISlider : UITouchableSprite
 		else
 			trackxPos += (int)trackTI.frame.width / 2;
 
-		// create a knob using our cacluated position
+		// create a knob using our calculated position
 		var knob = manager.addSprite( knobFilename, trackxPos, trackyPos, 1, true );
 		
 		return new UISlider( manager, trackFrame, 2, trackTI.uvRect, knob, layout );

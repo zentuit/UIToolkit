@@ -110,7 +110,7 @@ public class UIAnimation
 			// Get our easing position
 			float easPos = Mathf.Clamp01( ( Time.time - startTime ) / duration );
 			easPos = ease( easPos );
-			
+
 			// Set the proper property
 			switch( _aniProperty )
 			{
