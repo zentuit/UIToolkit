@@ -56,7 +56,19 @@ public class UIObject : System.Object
 		get { return clientTransform.position; }
 		set
 		{
+			Debug.LogWarning( "old pos: " + this + ": " + clientTransform.position );
 			clientTransform.position = value;
+			
+			// set the localPosition in reference to the parent
+			if( _parentUIObject != null )
+				clientTransform.localPosition = value - _parentUIObject.position;
+			else
+				clientTransform.localPosition = value;
+			
+			if( _parentUIObject != null )
+				Debug.LogWarning( "hasParent, new pos: " + value + ", parent pos: " + _parentUIObject.position + ", new localPos: " + clientTransform.localPosition );
+			Debug.LogWarning( "setting pos: " + value );
+			
 			if( onTransformChanged != null )
 				onTransformChanged();
 		}
@@ -69,6 +81,9 @@ public class UIObject : System.Object
 		set
 		{
 			clientTransform.localPosition = value;
+
+			transformChanged();
+			
 			if( onTransformChanged != null )
 				onTransformChanged();
 		}
@@ -133,10 +148,12 @@ public class UIObject : System.Object
 			// else then we are being removed from the UIObject so reparent to nada
 			if( _parentUIObject != null )
 			{
+				clientTransform.localPosition = _parentUIObject.position - clientTransform.position;
 				clientTransform.parent = _parentUIObject.clientTransform;
 			}
 			else
 			{
+				clientTransform.localPosition = clientTransform.position;
 				clientTransform.parent = null;
 				/*
 				if( this.GetType() == typeof( UISprite ) )

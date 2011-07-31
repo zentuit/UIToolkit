@@ -10,6 +10,7 @@ public class KitchenSinkManager : MonoBehaviour
 
 	void Start()
 	{
+		/*
 		// IMPORTANT: depth is 1 on top higher numbers on the bottom.  This means the lower the number is the closer it gets to the camera.
 		var y = UIRelative.yPercentFrom( UIyAnchor.Top, .05f );
 		var playButton = UIButton.create( "playUp.png", "playDown.png", 0, (int)y );
@@ -41,7 +42,7 @@ public class KitchenSinkManager : MonoBehaviour
 		knob.highlightedTouchOffsets = new UIEdgeOffsets( 30 );
 		knob.onKnobChanged += onKnobChanged;
 		knob.value = 0.3f;
-		
+		*/
 		
 		// Horizontal Slider
 		var hSlider = UISlider.create( "sliderKnob.png", "hSlider.png", 0, 0, UISliderLayout.Horizontal );
@@ -50,7 +51,7 @@ public class KitchenSinkManager : MonoBehaviour
 		hSlider.onChange += ( sender, val ) => Debug.Log( val );
 		hSlider.value = 0.6f;
 
-
+		/*
 		// Vertical Slider
 		var vSlider = UISlider.create( "vSliderKnob.png", "vSlider.png", 0, 0, UISliderLayout.Vertical );
 		vSlider.positionFromTopRight( .17f, .05f );
@@ -83,9 +84,9 @@ public class KitchenSinkManager : MonoBehaviour
 		
 		
 		// Test movement
-		StartCoroutine( marqueePlayButton( playButton ) );
-		StartCoroutine( animateProgressBar( progressBar ) );
-		StartCoroutine( pulseOptionButton( optionsButton ) );
+		//StartCoroutine( marqueePlayButton( playButton ) );
+		//StartCoroutine( animateProgressBar( progressBar ) );
+		//StartCoroutine( pulseOptionButton( optionsButton ) );
 		
 		
 		// UIObjects can be used like panels to group other UIObjects
@@ -93,7 +94,8 @@ public class KitchenSinkManager : MonoBehaviour
 		scores.parentUIObject = panel;
 		optionsButton.parentUIObject = panel;
 		
-		StartCoroutine( animatePanel( panel ) );
+		//StartCoroutine( animatePanel( panel ) );
+		*/
 	}
 	
 	
