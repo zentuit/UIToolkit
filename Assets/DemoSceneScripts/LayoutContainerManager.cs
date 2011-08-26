@@ -46,10 +46,38 @@ public class LayoutContainerManager : MonoBehaviour
 		var vBox = new UIVerticalLayout( 20 );
 		vBox.addChild( knob, toggleButton );
 		vBox.pixelsFromBottomRight( 10, 10 );
+		
+		
+		// LayoutContainer
+		var toggle1 = UIToggleButton.create( "cbUnchecked.png", "cbChecked.png", "cbDown.png", 0, 0 );
+		toggle1.selected = true;
+		var toggle2 = UIToggleButton.create( "cbUnchecked.png", "cbChecked.png", "cbDown.png", 0, 0 );
+		toggle2.selected = false;
+		var toggle3 = UIToggleButton.create( "cbUnchecked.png", "cbChecked.png", "cbDown.png", 0, 0 );
+		toggle3.selected = false;
+		var toggle4 = UIToggleButton.create( "cbUnchecked.png", "cbChecked.png", "cbDown.png", 0, 0 );
+		toggle4.selected = false;
+		var toggle5 = UIToggleButton.create( "cbUnchecked.png", "cbChecked.png", "cbDown.png", 0, 0 );
+		toggle5.selected = true;
+		var toggle6 = UIToggleButton.create( "cbUnchecked.png", "cbChecked.png", "cbDown.png", 0, 0 );
+		toggle6.selected = false;
+		
+		var hLayout1 = new UIHorizontalLayout( 10 );
+		hLayout1.addChild( toggle1, toggle2, toggle3 );
+		var hLayout2 = new UIHorizontalLayout( 10 );
+		hLayout2.addChild( toggle4, toggle5, toggle6 );
+		
+		var container = new UILayoutContainer(5);
+		container.addLayout(hLayout1, hLayout2);
+		container.positionCenter();
 
 		
 		// Layouts can be animated like any UIObject
 		StartCoroutine( animatePanel( hBox ) );
+
+			
+		// Layout containers can be also be animated like any UIObject
+		StartCoroutine( animateContainer( container ) );
 	}
 	
 	
@@ -78,6 +106,22 @@ public class LayoutContainerManager : MonoBehaviour
 			obj.endUpdates();
 			
 			yield return new WaitForSeconds( 2 );
+		}
+	}
+	
+	
+	private IEnumerator animateContainer( UIAbstractContainer obj )
+	{
+		var objectHeight = ((UILayoutContainer)obj).height;
+		while( true )
+		{
+			yield return new WaitForSeconds( 4 );
+			
+			var ani = obj.positionTo( 0.7f, new Vector3( obj.position.x, -Screen.height + objectHeight, obj.position.z ), Easing.Quartic.easeIn );
+			ani.autoreverse = true;
+			
+			yield return ani.chain();
+			
 		}
 	}
 	

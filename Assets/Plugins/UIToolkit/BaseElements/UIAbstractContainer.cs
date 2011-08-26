@@ -22,7 +22,7 @@ public class UIAbstractContainer : UIObject, IPositionable
 	public float height { get { return _height; } }
 	
 	protected List<UISprite> _children = new List<UISprite>();
-	private bool _suspendUpdates; // when true, layoutChildren will do nothing
+	protected bool _suspendUpdates; // when true, layoutChildren will do nothing
 	
 	
 
