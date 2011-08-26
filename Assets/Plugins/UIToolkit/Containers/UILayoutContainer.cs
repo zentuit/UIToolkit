@@ -13,12 +13,8 @@ public class UILayoutContainer : UIVerticalLayout
 	}
 	
 	public void addLayout(params UIAbstractContainer[] children) {
-			Debug.Log("layout count "+children.Length);
-		Debug.Log(children[0]);
-		Debug.Log(children[1]);
 		beginUpdates();
 		foreach (UIAbstractContainer item in children) {
-			Debug.Log("adding item: "+item);
 			item.parentUIObject = this;
 			_layouts.Add(item);
 		}
